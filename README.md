@@ -936,3 +936,53 @@ values
 valuesIn
 
 values，但是会检查原型链上的属性
+
+## Seq
+
+_
+
+类似jQuery的$，转化后就可以链式调用
+
+chain
+
+_，但是需要调用value取值
+
+tap
+
+*tap into
+
+thru
+
+*pass thru
+
+prototype[Symbol.iterator]
+
+*I don't know
+
+prototype.at
+
+*wrapper version of _.at
+
+prototype.chain
+
+*wrapper version of _.chain
+
+prototype.commit
+
+执行链式调用
+
+prototype.next
+
+*返回下一个值
+
+prototype.plant
+
+*同chain，但是新的初始值
+
+prototype.reverse
+
+*wrapeer version of _.reverse
+
+prototype.value
+
+返回解析值

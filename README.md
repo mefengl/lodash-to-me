@@ -748,3 +748,17 @@ JS有了它的sum
 sumBy
 
 sum，但是可以指定映射方式
+
+## Number
+
+clamp
+
+toSafeInteger，但是可以指定上下限
+
+inRange
+
+clamp，但是返回是否在范围内
+
+random
+
+JS有了它的random，random(int)是randint，random(int, int)是randrange，random(int, true)是randfloat

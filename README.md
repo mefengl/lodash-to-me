@@ -1222,3 +1222,7 @@ uniqueId
 ## Properties
 
 *I don't know
+
+## Methods
+
+*I don't know

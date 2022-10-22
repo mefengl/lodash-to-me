@@ -27,6 +27,12 @@ compact
 
 不用写 if 判断，方便的过滤掉数组中的假值
 
+```js
+// for...of 遍历可迭代对象
+// if(value)
+// result[resIndex++] = value
+```
+
 concat
 
 合并多个 flatten 的数组或值
@@ -510,6 +516,12 @@ conformsTo
 
 every，但可以方便分属性确认
 
+```js
+// lodash 直接返回结果的函数命名结尾带 To，比如该函数就有 conforms 的版本
+// 再比如，内部函数有 baseConformsTo，和 baseConforms
+// 参数有 source, keyToFunc，提取 source 的 key，然后用keyToFunc[key]来判断
+```
+
 eq
 
 NaN == NaN 的比较
@@ -806,7 +818,7 @@ clamp，但是返回是否在范围内
 
 random
 
-JS 有了它的 random，random(int)是 randint，random(int, int)是 randrange，random(int, true)是 randfloat
+JS 有了它的 random， random(int)是 randint， random(int, int)是 randrange， random(int, true)是 randfloat
 
 ## Object
 
@@ -1204,7 +1216,25 @@ bindAll
 
 cond
 
-类似 switch，但条件是函数
+类似 switch ，但条件是函数，返回是函数（可以很方便的复用）
+
+```js
+pairs = [
+  [condition, action],
+  [condition, action],
+  ...
+];
+
+function cond(pairs) {
+  return function (value) {
+for (const [condition, action] of pairs) {
+  if (condition(value)) {
+    return action(value);
+  };
+}
+  }
+}
+```
 
 conforms
 
@@ -1309,3 +1339,7 @@ uniqueId
 ## Methods
 
 \*I don't know
+
+```
+
+```

@@ -1,5 +1,6 @@
 # lodash-to-me
- 一边看Lodash文档，一边写下对每个接口应用场景的猜想
+
+一边看 Lodash 文档，一边写下对每个接口应用场景的猜想
 
 ## Array
 
@@ -7,13 +8,24 @@ chunk
 
 做多栏布局的时候，划分数据
 
+```js
+/** 从 lodash 的源码中，比较醒目的是，
+ *  while 替代 for 循环
+ *  从下面的代码中，的确 while 比 for 代码看起来更简洁，在表达上也更自由
+ */
+index = 0;
+while (index < length) {
+  result[resIndex++] = slice(array, index, (index += size));
+}
+```
+
 compact
 
-不用写if判断，方便的过滤掉数组中的假值
+不用写 if 判断，方便的过滤掉数组中的假值
 
 concat
 
-合并多个flatten的数组或值
+合并多个 flatten 的数组或值
 
 difference
 
@@ -25,15 +37,15 @@ differenceBy
 
 differenceWith
 
-comparator作为比较函数
+comparator 作为比较函数
 
 drop
 
-从左删除n个元素
+从左删除 n 个元素
 
 dropRight
 
-从右删除n个元素
+从右删除 n 个元素
 
 dropRightWhile
 
@@ -53,11 +65,11 @@ findIndex
 
 findLastIndex
 
-从后往前的findIndex
+从后往前的 findIndex
 
 first
 
-不用担心IndexError的array[0]，LISP的car
+不用担心 IndexError 的 array[0]，LISP 的 car
 
 flatten
 
@@ -77,15 +89,15 @@ fromPairs
 
 head
 
-first，不过4个字母
+first，不过 4 个字母
 
 indexOf
 
-匹配函数是==的findIndex
+匹配函数是==的 findIndex
 
 initial
 
-形同pop，但是不用改变原数组
+形同 pop，但是不用改变原数组
 
 intersection
 
@@ -97,23 +109,23 @@ intersectionBy
 
 intersectionWith
 
-交集，comparator作为比较函数
+交集，comparator 作为比较函数
 
 join
 
-JS有了它的join
+JS 有了它的 join
 
 last
 
-不用担心IndexError的array[-1]
+不用担心 IndexError 的 array[-1]
 
 lastIndexOf
 
-匹配函数是==的findLastIndex
+匹配函数是==的 findLastIndex
 
 nth
 
-不用担心IndexError的array[n]
+不用担心 IndexError 的 array[n]
 
 pull
 
@@ -129,7 +141,7 @@ pullAll，单元函数的返回值作为比较的依据
 
 pullAllWith
 
-pullAll，comparator作为比较函数
+pullAll，comparator 作为比较函数
 
 pullAt
 
@@ -141,11 +153,11 @@ remove
 
 reverse
 
-JS有了它的reverse
+JS 有了它的 reverse
 
 slice
 
-JS有了它的切片
+JS 有了它的切片
 
 sortedIndex
 
@@ -157,15 +169,15 @@ sortedIndexBy
 
 sortedIndexOf
 
-在sorted数组中求indexOf
+在 sorted 数组中求 indexOf
 
 sortedLastIndex
 
-在sorted数组中求lastIndexOf
+在 sorted 数组中求 lastIndexOf
 
 sortedUniq
 
-在sorted数组中求uniq
+在 sorted 数组中求 uniq
 
 sortedUniqBy
 
@@ -173,15 +185,15 @@ sortedUniq，单元函数的返回值作为比较的依据
 
 tail
 
-不用担心IndexError的array[1:]，LISP的cdr
+不用担心 IndexError 的 array[1:]，LISP 的 cdr
 
 take
 
-不用担心IndexError的array[:n]
+不用担心 IndexError 的 array[:n]
 
 takeRight
 
-不用担心IndexError的array[-n:]
+不用担心 IndexError 的 array[-n:]
 
 takeRightWhile
 
@@ -201,7 +213,7 @@ union，单元函数的返回值作为比较的依据
 
 unionWith
 
-union，comparator作为比较函数
+union，comparator 作为比较函数
 
 uniq
 
@@ -213,7 +225,7 @@ uniq，单元函数的返回值作为比较的依据
 
 uniqWith
 
-uniq，comparator作为比较函数
+uniq，comparator 作为比较函数
 
 unzip
 
@@ -225,7 +237,7 @@ unzip，提供合并函数
 
 without
 
-不原地修改的pull
+不原地修改的 pull
 
 xor
 
@@ -237,7 +249,7 @@ xor，单元函数的返回值作为比较的依据
 
 xorWith
 
-xor，comparator作为比较函数
+xor，comparator 作为比较函数
 
 zip
 
@@ -245,11 +257,11 @@ zip
 
 zipObject
 
-将参数中的数组合并成一个数组，然后fromPairs
+将参数中的数组合并成一个数组，然后 fromPairs
 
 zipObjectDeep
 
-智能的zipObject
+智能的 zipObject
 
 zipWith
 
@@ -267,11 +279,11 @@ every
 
 filter
 
-不原地修改的remove
+不原地修改的 remove
 
 find
 
-找到第一个满足predicate的元素
+找到第一个满足 predicate 的元素
 
 findLast
 
@@ -279,19 +291,19 @@ find，但最后一个
 
 flatMap
 
-map，然后flatten
+map，然后 flatten
 
 flatMapDeep
 
-map，然后flattenDeep
+map，然后 flattenDeep
 
 flatMapDepth
 
-map，然后flattenDepth
+map，然后 flattenDepth
 
 forEach
 
-可以用在字典上的forEach
+可以用在字典上的 forEach
 
 forEachRight
 
@@ -299,7 +311,7 @@ forEachRight
 
 groupBy
 
-分组，单元函数的返回值作为分组依据，返回字典，key是分组依据，value是分组的元素数组
+分组，单元函数的返回值作为分组依据，返回字典，key 是分组依据，value 是分组的元素数组
 
 includes
 
@@ -307,15 +319,15 @@ includes
 
 invokeMap
 
-LISP中的mapcar
+LISP 中的 mapcar
 
 keyBy
 
-提取数组中某值作为数组的key，可以是单元函数
+提取数组中某值作为数组的 key，可以是单元函数
 
 map
 
-不原地修改的invokeMap
+不原地修改的 invokeMap
 
 orderBy
 
@@ -323,11 +335,11 @@ sortBy，但是接受的是一一对应的函数数组和排序方向数组
 
 partition
 
-根据predicate的真假结果分成两个数组
+根据 predicate 的真假结果分成两个数组
 
 reduce
 
-JS有了它的reduce
+JS 有了它的 reduce
 
 reduceRight
 
@@ -335,7 +347,7 @@ reduce，但是反向
 
 reject
 
-类似filter，但是假值留下
+类似 filter，但是假值留下
 
 sample
 
@@ -347,11 +359,11 @@ sampleSize
 
 shuffle
 
-JS有了它的shuffle
+JS 有了它的 shuffle
 
 size
 
-JS有了它的len
+JS 有了它的 len
 
 some
 
@@ -365,13 +377,13 @@ sortBy
 
 now
 
-得到timestamp
+得到 timestamp
 
 ## Function
 
 after
 
-生成一个调用n次后才会执行的函数，可以用在模型训练中的500次循环输出一次的场景
+生成一个调用 n 次后才会执行的函数，可以用在模型训练中的 500 次循环输出一次的场景
 
 ary
 
@@ -379,15 +391,17 @@ ary
 
 before
 
-生成一个调用n次前才会执行的函数，可以用在闹钟的贪睡功能
+生成一个调用 n 次前才会执行的函数，可以用在闹钟的贪睡功能
+
+创建 n 的闭包，每次调用都会减少 n 的值，当 n 为 0 时，将 func 置为 undefined，将其释放，这样，之后调用的时候就不会再执行 func 了
 
 bind
 
-想不到使用的场景，this的问题箭头函数可以解决
+想不到使用的场景，this 的问题箭头函数可以解决
 
 bindKey
 
-绑定key，key对应的值可以更改，从而实现更改绑定的函数
+绑定 key，key 对应的值可以更改，从而实现更改绑定的函数
 
 curry
 
@@ -407,7 +421,7 @@ defer
 
 delay
 
-defer，但是可以指定延迟时间（那和setTimeout有什么区别？
+defer，但是可以指定延迟时间（那和 setTimeout 有什么区别？
 
 flip
 
@@ -451,11 +465,11 @@ spread
 
 throttle
 
-节流，可以用在滚动加载，和debounce的区别是，throttle能保证每隔一段时间执行
+节流，可以用在滚动加载，和 debounce 的区别是，throttle 能保证每隔一段时间执行
 
 unary
 
-ary，但是ary(func, 1)
+ary，但是 ary(func, 1)
 
 wrap
 
@@ -465,11 +479,16 @@ wrap
 
 castArray
 
-转Array
+提取多个参数中的第一个，转 Array
+
+```js
+// 通用：将任意值转为数组
+Array.isArray(value) ? value : [value];
+```
 
 clone
 
-JS有了它的copy
+JS 有了它的 copy
 
 cloneDeep
 
@@ -497,11 +516,11 @@ gt
 
 gte
 
->=
+> =
 
 isArguments
 
-判断是否是arguments对象？
+判断是否是 arguments 对象？
 
 isArray
 
@@ -509,11 +528,11 @@ isArray
 
 isArrayBuffer
 
-判断是否是ArrayBuffer
+判断是否是 ArrayBuffer
 
 isArrayLike
 
-判断是否是类数组，比如HTMLCollection
+判断是否是类数组，比如 HTMLCollection
 
 isArrayLikeObject
 
@@ -521,19 +540,19 @@ isArrayLike，但是元素是对象
 
 isBoolean
 
-判断是否是bool
+判断是否是 bool
 
 isBuffer
 
-判断是否是Buffer
+判断是否是 Buffer
 
 isDate
 
-判断是否是Date
+判断是否是 Date
 
 isElement
 
-判断是否是DOM元素
+判断是否是 DOM 元素
 
 isEmpty
 
@@ -549,31 +568,31 @@ isEqual，但是可以指定比较规则
 
 isError
 
-判断是否是Error
+判断是否是 Error
 
 isFinite
 
-判断是否不是Infinity
+判断是否不是 Infinity
 
 isFunction
 
-判断是否是function
+判断是否是 function
 
 isInteger
 
-判断是否是integer
+判断是否是 integer
 
 isLength
 
-判断一个数是否可能是数组的length
+判断一个数是否可能是数组的 length
 
 isMap
 
-判断是否是Map
+判断是否是 Map
 
 isMatch
 
-部分eq
+部分 eq
 
 isMatchWith
 
@@ -581,31 +600,31 @@ isMatch，但是可以指定比较规则
 
 isNaN
 
-判断是否是NaN
+判断是否是 NaN
 
 isNative
 
-判断是否是native函数
+判断是否是 native 函数
 
 isNil
 
-判断是否是null或者undefined
+判断是否是 null 或者 undefined
 
 isNull
 
-判断是否是null
+判断是否是 null
 
 isNumber
 
-判断是否是number，包括NaN，Infinity
+判断是否是 number，包括 NaN，Infinity
 
 isObject
 
-判断是否是object
+判断是否是 object
 
 isObjectLike
 
-isObject，但是typeof objectLike == 'object'
+isObject，但是 typeof objectLike == 'object'
 
 isPlainObject
 
@@ -613,39 +632,39 @@ isPlainObject
 
 isRegExp
 
-判断是否是RegExp
+判断是否是 RegExp
 
 isSafeInteger
 
-判断是否是IEEE-754双精度整数
+判断是否是 IEEE-754 双精度整数
 
 isSet
 
-判断是否是Set
+判断是否是 Set
 
 isString
 
-判断是否是string
+判断是否是 string
 
 isSymbol
 
-判断是否是symbol
+判断是否是 symbol
 
 isTypedArray
 
-判断是否是TypedArray，比如Uint8Array
+判断是否是 TypedArray，比如 Uint8Array
 
 isUndefined
 
-判断是否是undefined
+判断是否是 undefined
 
 isWeakMap
 
-判断是否是WeakMap
+判断是否是 WeakMap
 
 isWeakSet
 
-判断是否是WeakSet
+判断是否是 WeakSet
 
 lt
 
@@ -657,23 +676,23 @@ lte
 
 toArray
 
-是object，就转为array
+是 object，就转为 array
 
 toFinite
 
-转为finite
+转为 finite
 
 toInteger
 
-转为integer
+转为 integer
 
 toLength
 
-转为可能的length
+转为可能的 length
 
 toNumber
 
-转为number
+转为 number
 
 toPlainObject
 
@@ -681,11 +700,26 @@ toPlainObject
 
 toSafeInteger
 
-转为IEEE-754双精度整数
+转为 IEEE-754 双精度整数
 
 toString
 
-转为string
+转为 string，其实 JS 已经有了
+
+```js
+// 转字符串
+`${value}`;
+// 数组转字符串
+const toString = (value) => `${value.map((v) => (v == null ? v : `${v}`))}`;
+// 嵌套数组转字符串
+const toString = (value) => {
+  if (Array.isArray(value)) {
+    return `${value.map((v) => (v == null ? v : toString(v)))}`;
+  } else {
+    return `${value}`;
+  }
+};
+```
 
 ## Math
 
@@ -707,7 +741,7 @@ floor
 
 max
 
-JS有了它的max
+JS 有了它的 max
 
 maxBy
 
@@ -715,7 +749,7 @@ max，但是可以指定映射方式
 
 mean
 
-JS有了它的mean
+JS 有了它的 mean
 
 meanBy
 
@@ -723,7 +757,7 @@ mean，但是可以指定映射方式
 
 min
 
-JS有了它的min
+JS 有了它的 min
 
 minBy
 
@@ -743,7 +777,7 @@ subtract
 
 sum
 
-JS有了它的sum
+JS 有了它的 sum
 
 sumBy
 
@@ -755,39 +789,59 @@ clamp
 
 toSafeInteger，但是可以指定上下限
 
+```js
+// 问：一个三元表达式，可以实现上界或下界，如何实现上下界？
+// 答：两个三元表达式
+num = num > max ? max : num;
+num = num < min ? min : num;
+```
+
 inRange
 
 clamp，但是返回是否在范围内
 
 random
 
-JS有了它的random，random(int)是randint，random(int, int)是randrange，random(int, true)是randfloat
+JS 有了它的 random，random(int)是 randint，random(int, int)是 randrange，random(int, true)是 randfloat
 
 ## Object
 
 assign
 
-*不知道有什么用
+\*不知道有什么用
 
 assignIn
 
-*assign，但是会把原型链上的属性也拷贝
+\*assign，但是会把原型链上的属性也拷贝
 
 assignInWith
 
-*assignIn，但是可以指定拷贝规则
+\*assignIn，但是可以指定拷贝规则
 
 assignWith
 
-*assign，但是可以指定拷贝规则
+\*assign，但是可以指定拷贝规则
 
 at
 
-*通过path数组获取对象的值
+\*通过 path 数组获取对象的值
+
+用`...paths`接受参数，利用 baseFlatten 把剩余参数展开一层，这样数组参数和非数组参数就可以同样处理了
+
+eg:
+
+```js
+var object = { a: [{ b: { c: 3 } }, 4] };
+
+at(object, ["a[0].b.c", "a[1]"]); // [3, 4]
+at(object, "a[0].b.c", "a[1]"); // [3, 4]
+
+/** from https://underglaze-blue.github.io/lodash-analysis/export/at.html */
+```
 
 create
 
-*指定继承属性
+\*指定继承属性
 
 defaults
 
@@ -799,7 +853,7 @@ defaults，但是不止一层
 
 findKey
 
-find，但是返回key
+find，但是返回 key
 
 findLastKey
 
@@ -807,7 +861,7 @@ findKey，但是从后往前
 
 forIn
 
-可以用在字典上的forIn
+可以用在字典上的 forIn
 
 forInRight
 
@@ -815,7 +869,7 @@ forIn，但是从后往前
 
 forOwn
 
-*遍历定义时的属性
+\*遍历定义时的属性
 
 forOwnRight
 
@@ -847,7 +901,7 @@ invert
 
 invertBy
 
-invert，但是可以指定values_to_key的映射方式
+invert，但是可以指定 values_to_key 的映射方式
 
 invoke
 
@@ -855,7 +909,7 @@ invoke
 
 keys
 
-返回数组的key数组
+返回数组的 key 数组
 
 keysIn
 
@@ -863,15 +917,15 @@ keys，但是会检查原型链上的属性
 
 mapKeys
 
-map，但是只映射key
+map，但是只映射 key
 
 mapValues
 
-map，但是只映射value
+map，但是只映射 value
 
 merge
 
-像Git merge 一样合并对象
+像 Git merge 一样合并对象
 
 mergeWith
 
@@ -879,23 +933,23 @@ merge，但是可以指定合并规则
 
 omit
 
-不要指定的属性，和pick相反
+不要指定的属性，和 pick 相反
 
 omitBy
 
-omit，但是可以指定过滤方式，比如_.isNumber
+omit，但是可以指定过滤方式，比如\_.isNumber
 
 pick
 
-只要指定的属性，和omit相反
+只要指定的属性，和 omit 相反
 
 pickBy
 
-pick，但是可以指定过滤方式，比如_.isNumber
+pick，但是可以指定过滤方式，比如\_.isNumber
 
 result
 
-*get，但可以调用函数
+\*get，但可以调用函数
 
 set
 
@@ -915,7 +969,7 @@ toPairs，但是会检查原型链上的属性
 
 transform
 
-*reduce 的替代
+\*reduce 的替代
 
 unset
 
@@ -923,15 +977,15 @@ unset
 
 update
 
-set，但是可以指定updater
+set，但是可以指定 updater
 
 updateWith
 
-setWith，但是可以指定updater
+setWith，但是可以指定 updater
 
 values
 
-返回字典的value数组
+返回字典的 value 数组
 
 valuesIn
 
@@ -939,33 +993,33 @@ values，但是会检查原型链上的属性
 
 ## Seq
 
-_
+\_
 
-类似jQuery的$，转化后就可以链式调用
+类似 jQuery 的$，转化后就可以链式调用
 
 chain
 
-_，但是需要调用value取值
+\_，但是需要调用 value 取值
 
 tap
 
-*tap into
+\*tap into
 
 thru
 
-*pass thru
+\*pass thru
 
 prototype[Symbol.iterator]
 
-*I don't know
+\*I don't know
 
 prototype.at
 
-*wrapper version of _.at
+\*wrapper version of \_.at
 
 prototype.chain
 
-*wrapper version of _.chain
+\*wrapper version of \_.chain
 
 prototype.commit
 
@@ -973,15 +1027,15 @@ prototype.commit
 
 prototype.next
 
-*返回下一个值
+\*返回下一个值
 
 prototype.plant
 
-*同chain，但是新的初始值
+\*同 chain，但是新的初始值
 
 prototype.reverse
 
-*wrapeer version of _.reverse
+\*wrapeer version of \_.reverse
 
 prototype.value
 
@@ -993,9 +1047,29 @@ camelCase
 
 驼峰命名
 
+```js
+// 通用：通过参数传递调用方法
+value[methodName](...args); // 就像是字典 .name 和 ["name"] 一样
+// 「一个方法就是一个可以被调用的属性而已」 from @Underglaze-Blue
+
+/** 类似驼峰命名这样的函数，可以抽象为对字符串某个「特殊位置」的「特殊处理」
+ * 特殊处理可以是 首字母大写 ，特殊位置可以是 string[0]
+ * 比如lodash就专门封装了一个函数工厂createCaseFirst，返回对「首字母」进行由参数指定的「特殊处理」的函数
+ * 即：const upperFirst = createCaseFirst('toUpperCase')
+ * 太优雅了
+ */
+
+// 通用：跳过 index 为0的情况
+index ? callFunction : notCallFunction;
+```
+
 capitalize
 
 首字母大写
+
+```js
+upperFirst(string.toLowerCase());
+```
 
 deburr
 
@@ -1007,7 +1081,7 @@ endsWith
 
 escape
 
-为HTML转义
+为 HTML 转义
 
 escapeRegExp
 
@@ -1067,7 +1141,7 @@ startsWith
 
 template
 
-*有了模版字符串，这个就没啥用了
+\*有了模版字符串，这个就没啥用了
 
 toLower
 
@@ -1095,7 +1169,7 @@ truncate
 
 unescape
 
-反escape
+反 escape
 
 upperCase
 
@@ -1109,11 +1183,16 @@ words
 
 分割成单词
 
+```js
+// lodash 的做法是利用正则表达式提取出所有单词，很反逻辑，不过这样就可以自己决定哪些是单词了
+// 日常 空格分割 还是 .split(' ')
+```
+
 ## Util
 
 attempt
 
-不用catch的try，可以用在querySelector，但似乎jQuery已经有了
+不用 catch 的 try，可以用在 querySelector，但似乎 jQuery 已经有了
 
 bindAll
 
@@ -1121,31 +1200,31 @@ bindAll
 
 cond
 
-类似switch，但条件是函数
+类似 switch，但条件是函数
 
 conforms
 
-类似_.matches，但条件是函数
+类似\_.matches，但条件是函数
 
 matchesProperty
 
-创建一个函数，判断对象的指定属性是否符合条件，可以用于_.filter，_.find
+创建一个函数，判断对象的指定属性是否符合条件，可以用于*.filter，*.find
 
 method
 
-*I don't know
+\*I don't know
 
 methodOf
 
-*oppoiste of _.method
+\*oppoiste of \_.method
 
 mixin
 
-给对象添加方法，可以用于扩展lodash
+给对象添加方法，可以用于扩展 lodash
 
 noConflict
 
-恢复_的原始值
+恢复\_的原始值
 
 noop
 
@@ -1153,7 +1232,7 @@ undefined 制造机
 
 nthArg
 
-返回第n个参数的函数
+返回第 n 个参数的函数
 
 over
 
@@ -1169,23 +1248,23 @@ over + some
 
 property
 
-有path，等待object去取值的函数
+有 path，等待 object 去取值的函数
 
 propertyOf
 
-有object，等待path去取值的函数
+有 object，等待 path 去取值的函数
 
 range
 
-JS有了它的range
+JS 有了它的 range
 
 rangeRight
 
-JS有了它的reversed(range)
+JS 有了它的 reversed(range)
 
 runInContext
 
-*创建一个新的lodash实例
+\*创建一个新的 lodash 实例
 
 stubArray
 
@@ -1209,20 +1288,20 @@ true
 
 times
 
-执行n次，比如结合stubArray，创建n个空数组
+执行 n 次，比如结合 stubArray，创建 n 个空数组
 
 toPath
 
-从字符串path转成path数组
+从字符串 path 转成 path 数组
 
 uniqueId
 
-添加唯一id
+添加唯一 id
 
 ## Properties
 
-*I don't know
+\*I don't know
 
 ## Methods
 
-*I don't know
+\*I don't know

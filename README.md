@@ -2,6 +2,8 @@
 
 一边看 Lodash 文档，一边写下对每个接口应用场景的猜想
 
+https://underglaze-blue.github.io/lodash-analysis/start/start.html
+
 ## Array
 
 chunk

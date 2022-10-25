@@ -1262,6 +1262,14 @@ defaultTo
 and deal with NaN
 `value = value !== value ? defaultValue : value`
 
+defaultToAny
+
+类似 defaultTo，但可以传多个值，返回第一个不是 null 或 undefined 的值
+
+`defaultToAny(a,b,c,d) = [a,b,c,d].reduce(defaultTo)`
+
+`defaultToAny(a,b,c,d) = defaultTo(defaultTo(defaultTo(a, b),c),d)`
+
 flow
 
 compose 格式的 chain，或者说 reversed compose
@@ -1381,7 +1389,3 @@ uniqueId
 ## Methods
 
 \*I don't know
-
-```
-
-```

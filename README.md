@@ -425,6 +425,18 @@ debounce
 
 防抖，可以用在搜索框的输入
 
+```js
+// still dont't know why
+// but have a short version for own purpose
+const debounce = (func, wait) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+};
+```
+
 defer
 
 延迟执行，setTimeout(func, 1ms)
@@ -1239,6 +1251,36 @@ for (const [condition, action] of pairs) {
 conforms
 
 类似\_.matches，但条件是函数
+
+constant
+
+\*将值转为函数
+
+defaultTo
+
+`value = value == null ? defaultValue : value`
+and deal with NaN
+`value = value !== value ? defaultValue : value`
+
+flow
+
+compose 格式的 chain，或者说 reversed compose
+
+flowRight
+
+compose，但接受函数数组，而不是多个函数参数
+
+identity
+
+返回第一个参数
+
+iteratee
+
+\*按某种自定义的规则提取数组
+
+matches
+
+和 iteratee 似乎差不多？
 
 matchesProperty
 

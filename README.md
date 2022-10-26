@@ -1,6 +1,6 @@
 # lodash-to-me
 
-一边看 Lodash 文档，一边写下对每个接口应用场景的猜想
+souce code, of course, or what?
 
 参考：
 

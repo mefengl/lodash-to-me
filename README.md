@@ -873,7 +873,20 @@ create
 
 defaults
 
-指定默认值
+批量指定候选默认值，defaultToAny 是指定批量候选默认值
+
+```js
+function defaults(object, ...source) {
+  source.forEach((s) => {
+    for (const key in s) {
+      if (object[key] === undefined) {
+        object[key] = s[key];
+      }
+    }
+  });
+  return object;
+}
+```
 
 defaultsDeep
 
@@ -1106,6 +1119,10 @@ deburr
 endsWith
 
 是否以指定字符串结尾
+
+```js
+string.slice(posion, end) === target;
+```
 
 escape
 
@@ -1389,3 +1406,23 @@ uniqueId
 ## Methods
 
 \*I don't know
+
+## Internal
+
+baseWhile
+
+```js
+functioni baseWhile(array, predicate, isDrop, fromRight){
+  const { length } = array;
+  // 和下面的while条件配合，可以通过一个变量控制循环方向
+  let index = fromRight ? length : -1;
+  while (
+    (fromRight ? index-- : ++index < length) &&
+    predicate(array[index], index, array)
+  ) {}
+  // 两个值的三元运算符，四种情况，一行
+  return isDrop
+    ? slice(array, fromRight ? 0 : index, fromRight ? index + 1 : length)
+    : slice(array, fromRight ? index + 1 : 0, fromRight ? length : index);
+}
+```

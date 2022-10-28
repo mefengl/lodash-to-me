@@ -73,6 +73,10 @@ findIndex
 
 自定义匹配函数
 
+```js
+// just go through a array, do not need modify the 'predicate' like findKey does
+```
+
 findLastIndex
 
 从后往前的 findIndex
@@ -287,9 +291,17 @@ every
 
 所有元素满足条件
 
+```js
+// 常见的迭代过程中return false，循环外return true的写法，做了一个封装
+```
+
 filter
 
 不原地修改的 remove
+
+```js
+result[resIndex++] = value;
+```
 
 find
 
@@ -448,6 +460,13 @@ defer，但是可以指定延迟时间（那和 setTimeout 有什么区别？
 flip
 
 参数反转
+
+```js
+const flip =
+  (func) =>
+  (...args) =>
+    func(...args.reverse());
+```
 
 memoize
 
@@ -896,9 +915,18 @@ findKey
 
 find，但是返回 key
 
+```js
+// key相关，有value=object[key]
+// 遍历相关，类似map，不过最后返回undefined
+```
+
 findLastKey
 
 findKey，但是从后往前
+
+```js
+// by something we called 'baseXXX', and with traverse tricks in it, can easily implement both 'xxx' and 'xxxLast'
+```
 
 forIn
 
@@ -1291,9 +1319,39 @@ flow
 
 compose 格式的 chain，或者说 reversed compose
 
+```js
+const flow = (...fs) => {
+  const length = fs.length
+  return (...args) => {
+    let index = -1
+    let result = ...args
+    while (++index < length) {
+      // don't know why there need to use call(this,result)
+      result = fs[index](result)
+    }
+    return result
+  }
+}
+```
+
 flowRight
 
 compose，但接受函数数组，而不是多个函数参数
+
+```js
+const flowRight = (...fs) => flow(...fs.reverse())
+// or
+const flowRight = (fs) => {
+  let length = fs.length
+  return (...args) => {
+    let result = ...args
+    while (length--) {
+      result = fs[index](result)
+    }
+    return result
+  }
+}
+```
 
 identity
 
@@ -1424,5 +1482,27 @@ functioni baseWhile(array, predicate, isDrop, fromRight){
   return isDrop
     ? slice(array, fromRight ? 0 : index, fromRight ? index + 1 : length)
     : slice(array, fromRight ? index + 1 : 0, fromRight ? length : index);
+}
+```
+
+baseFlatten
+
+```js
+function baseFlatten(array, depth, result) {
+  for (const value of array) {
+    // !Array.isArrary(value) is one of the base cases of recursion
+    // so flattenDeep is just flatten with depth = Infinity
+    // Infinity = 1/0 by the way
+    if (depth > 0 && Array.isArray(value)) {
+      if (depth > 1) {
+        baseFlatten(value, depth - 1, result);
+      } else {
+        result.push(...value);
+      }
+    } else {
+      result[result.length] = value;
+    }
+  }
+  return result;
 }
 ```

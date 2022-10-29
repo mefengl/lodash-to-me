@@ -163,6 +163,10 @@ last
 
 不用担心 IndexError 的 array[-1]
 
+```js
+const last = (arr) => (arr && arr[arr.length - 1]) || undefined;
+```
+
 lastIndexOf
 
 匹配函数是==的 findLastIndex
@@ -386,9 +390,44 @@ keyBy
 
 提取数组中某值作为数组的 key，可以是单元函数
 
+```js
+const keyBy = (array, iteratee) => {
+  return array.reduce((result, value) => {
+    result[iteratee(value)] = value;
+    return result;
+  }, {});
+};
+```
+
 map
 
-不原地修改的 invokeMap
+```js
+// arrayMap
+const arrayMap = (array, iteratee) => {
+  let i = array.length || 0;
+  const result = new Array(i);
+  while (i--) {
+    result[i] = iteratee(array[i]);
+  }
+};
+// baseMap, mapObject in old version Lodash
+const baseMap = (object, iteratee) => {
+  const result = {};
+  Object.keys(object).forEach((key) => {
+    result[key] = iteratee(object[key]);
+  });
+  return result;
+};
+// standard, traverse from left to right, and give iteratee three arguments
+const map = (array, iteratee) => {
+  let index = -1;
+  const length = array.length || 0;
+  const result = new Array(length);
+  while (++index < length) {
+    result[index] = iteratee(array[index], index, array);
+  }
+};
+```
 
 orderBy
 
@@ -760,7 +799,15 @@ lt
 
 <
 
+```js
+const lt = (value, other) => +value < +other;
+```
+
 lte
+
+```js
+const lte = (value, other) => +value <= +other;
+```
 
 <=
 
@@ -831,19 +878,49 @@ floor
 
 max
 
-JS 有了它的 max
+```js
+// yes, O(n), also no magic here
+const max = (array) => array.reduce((a, b) => (a > b ? a : b));
+```
 
 maxBy
 
-max，但是可以指定映射方式
+```js
+// O(2n)'s version, and simple reduce
+const maxBy = (array, iteratee) =>
+  array.reduce((a, b) => (iteratee(a) > iteratee(b) ? a : b));
+// O(n) version
+const maxBy = (array, iteratee) => {
+  let result = array[0];
+  let computed = iteratee(array[0]);
+  // yes, calculate array[0] twice... what a waste
+  array.forEach((v) => {
+    const current = iteratee(v);
+    if (current > computed) {
+      result = v;
+      computed = current;
+    }
+  });
+};
+```
 
 mean
 
-JS 有了它的 mean
+```js
+// mean = sum / length
+const mean = (array) => array.reduce((a, b) => a + b) / array.length;
+// or
+const mean = (array) => sum(array) / array.length;
+```
 
 meanBy
 
-mean，但是可以指定映射方式
+```js
+const meanBy = (array, iteratee) =>
+  array.reduce((a, b) => a + iteratee(b)) / array.length;
+// or
+const meanBy = (array, iteratee) => sumBy(array, iteratee) / array.length;
+```
 
 min
 
@@ -867,11 +944,20 @@ subtract
 
 sum
 
-JS 有了它的 sum
+```js
+const sum = (array) => array.reduce((a, b) => a + b);
+// or baseSum(array, v => v)
+const baseSum = (array, iteratee) => array.reduce((a, b) => a + iteratee(b), 0);
+const sum = (array) => baseSum(array, (v) => v);
+```
 
 sumBy
 
-sum，但是可以指定映射方式
+```js
+// just baseSum
+const sumBy = (array, iteratee) => baseSum(array, iteratee);
+// const baseSum = (array, iteratee) => array.reduce((a, b) => a + iteratee(b), 0);
+```
 
 ## Number
 
@@ -1074,27 +1160,79 @@ invert，但是可以指定 values_to_key 的映射方式
 
 invoke
 
-在对象的部分属性上调用函数
+```js
+const invoke = (object, path, ...args) => {
+  // get = toPath + while loop logic
+  path = Array.isArray(path) ? path : path.split(".");
+  const length = path.length;
+  let i = -1;
+  while (++i < length) {
+    object = object[path[i]];
+  }
+  const func = object;
+  return func(...args);
+};
+```
 
 keys
 
-返回数组的 key 数组
+```js
+for (const key in object) {
+  if (object.hasOwnProperty(key)) {
+    keys.push(key);
+  }
+}
+// or
+Object.keys(object);
+```
 
 keysIn
 
-keys，但是会检查原型链上的属性
+```js
+// also keys in prototype chain, I don't know, haven't met similar use case before
+for (const key in object) {
+  keys.push(key);
+}
+```
 
 mapKeys
 
 map，但是只映射 key
 
+```js
+const mapKeys = (object, iteratee) => {
+  const result = {};
+  Object.keys(object).forEach((key) => {
+    // iteratee always take value, key, object in lodash
+    // with value is cool, you can change key depend on value
+    // here we only take the key
+    const newKey = iteratee(key);
+    result[newKey] = object[key];
+    // result[iteratee(object[key])] = object[key];
+  });
+  return result;
+};
+```
+
 mapValues
 
-map，但是只映射 value
+```js
+const mapValues = (object, iteratee) => {
+  const result = {};
+  Object.keys(object).forEach((key) => {
+    const newValue = iteratee(object[key]);
+    result[key] = newValue;
+    // result[key] = iteratee(object[key]);
+  });
+  return result;
+};
+```
 
 merge
 
-像 Git merge 一样合并对象
+```js
+// too complex, can't understand, yet
+```
 
 mergeWith
 
@@ -1463,7 +1601,21 @@ iteratee
 
 matches
 
-和 iteratee 似乎差不多？
+```js
+// it's job is to return a function that can use in filter or sth. like that
+// by far, I only understand the getMatchData part, kind of like entries
+const getMatchData = (object) => {
+  const props = Object.keys(object);
+  let i = props.length;
+  const result = new Array(i);
+  while (i--) {
+    const key = props[i];
+    const value = object[key];
+    result[i] = [key, value];
+    // result[i] = [props[i], object[props[i]]];
+  }
+};
+```
 
 matchesProperty
 
@@ -1471,11 +1623,49 @@ matchesProperty
 
 method
 
-\*I don't know
+```js
+const method = (path, ...args) => {
+  // toPath function
+  path = Array.isArray(path) ? path : path.split(".");
+  const length = path.length;
+  return (object) => {
+    let index = -1;
+    // get function
+    while (++index < length) {
+      object = object[path[index]];
+    }
+    const func = object;
+    return func(...args);
+  };
+};
+// or
+const method = (path, ...args) => {
+  // because the toPath is implemented in a idempotent way, it ok that translate path to array here
+  return (object) => invoke(object, path, ...args);
+```
 
 methodOf
 
-\*oppoiste of \_.method
+```js
+// basically the same as method, in code level
+const methodOf = (object, ...args) => {
+  return (path) => {
+    // toPath function
+    path = Array.isArray(path) ? path : path.split(".");
+    const length = path.length;
+    let index = -1;
+    while (++index < length) {
+      object = object[path[index]];
+    }
+    const func = object;
+    return func(...args);
+  };
+};
+// or
+const methodOf = (object, ...args) => {
+  return (path) => invoke(object, path, ...args);
+};
+```
 
 mixin
 
@@ -1553,6 +1743,14 @@ toPath
 
 从字符串 path 转成 path 数组
 
+```js
+const toPath = (string) => {
+  return string.split(".");
+  // idempotent version
+  // return isArray(value) ? string : string.split('.');
+};
+```
+
 uniqueId
 
 添加唯一 id
@@ -1605,4 +1803,21 @@ function baseFlatten(array, depth, result) {
   }
   return result;
 }
+```
+
+## Old Version Methods
+
+getTag
+
+```js
+// it's ok to create a grammar sugar for oneself, such as
+const toString = Object.prototype.toString;
+const getTag = (value) => toString(value);
+// standard
+const getTag = (value) => {
+  if (value == null) {
+    return value === undefined ? "[object Undefined]" : "[object Null]";
+  }
+  return toString(value);
+};
 ```

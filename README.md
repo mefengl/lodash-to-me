@@ -6,6 +6,8 @@ souce code, of course, or what?
 
 > https://underglaze-blue.github.io/lodash-analysis/start/start.html
 
+when dealing with left or right traverse, lodash way is to have a basexxx, and then make xxx(left) and xxxright easily. And in basexxx, two direction is not make things complex at all, just takes two ternary operator(one is `fromRight ? index-- : ++index < length`)
+
 ## Array
 
 chunk
@@ -105,13 +107,41 @@ head
 
 first，不过 4 个字母
 
+```js
+const head(arr) => arr != null && arr.length ? arr[0] : undefined
+// or, because arr != null is enough
+const head = (arr) => arr && arr[0]
+```
+
 indexOf
 
-匹配函数是==的 findIndex
+```js
+// traverse array in a normal way, yes, O(n), so what? now you can have your own indexOf, that's what really important
+const indexOf = (arr, value) => {
+  let index = -1;
+  const length = arr.length;
+  while (++index < length) {
+    if (arr[index] === value) {
+      return index;
+    }
+  }
+  return -1;
+};
+```
 
 initial
 
-形同 pop，但是不用改变原数组
+```js
+const initial = (arr) => {
+  let i = arr.length - 1;
+  const res = new Array(i);
+  while (i--) {
+    res[i] = arr[i];
+  }
+  return res;
+};
+// well, basically, if you change i to end-start, then you get slice, really no magic here
+```
 
 intersection
 
@@ -333,7 +363,16 @@ forEachRight
 
 groupBy
 
-分组，单元函数的返回值作为分组依据，返回字典，key 是分组依据，value 是分组的元素数组
+```js
+// Copilot's code, thank you, Copilot
+const groupBy = (array, iteratee) => {
+  return array.reduce((result, value) => {
+    const key = iteratee(value);
+    (result[key] || (result[key] = [])).push(value);
+    return result;
+  }, {});
+};
+```
 
 includes
 
@@ -559,11 +598,15 @@ NaN == NaN 的比较
 
 gt
 
->
+```js
+const gt = (value, other) => +value > +other;
+```
 
 gte
 
-> =
+```js
+const gte = (value, other) => +value >= +other;
+```
 
 isArguments
 
@@ -845,7 +888,22 @@ num = num < min ? min : num;
 
 inRange
 
-clamp，但是返回是否在范围内
+```js
+const inRange = (num, start, end) => num >= start && num < end;
+// a complex version
+// a public code package's problem is too much consideration for all situation.
+// but we don't have to consider that much to write our own 'inRange' or many other more common function
+const baseInRange = (num, start, end) => {
+  return num >= Math.min(start, end) && num < Math.max(start, end);
+};
+const inRange = (num, start, end) => {
+  if (end === undefined) {
+    end = start;
+    start = 0;
+  }
+  return baseInRange(num, start, end);
+};
+```
 
 random
 
@@ -940,13 +998,33 @@ forOwn
 
 \*遍历定义时的属性
 
+```js
+// traverse object
+Object.keys(object).map((key) => xxx);
+// or
+Object.entries(object).map(([key, value]) => xxx);
+```
+
 forOwnRight
 
-forOwn，但是从后往前
+```js
+// forOwn(xxx)'s keypoint is Object.keys(object), not forEach, forEach is just a grammar sugar to traverse `keys`
+const props = Object.keys(object);
+let length = props.length;
+while (length--) {
+  const key = props[length];
+  object[key];
+}
+```
 
 functions
 
-forOwn，但是返回函数属性的名字
+forOwn，但是 only 返回函数属性的名字
+
+```js
+// the way to get some specific properties of an object
+Object.keys(obj).filter((key) => typeof object[key] === "specific type");
+```
 
 functionsIn
 
@@ -954,7 +1032,18 @@ functions，但是非定义时的函数属性的名字也会返回
 
 get
 
-at，但是只提取一个
+```js
+// the way to get a deep property of an object
+const path = "ui.color.red".split(".");
+// or
+const path = ["ui", "color", "red"];
+let i = 0;
+const len = path.length;
+// if use obj && xxx, "" will be treated as false, that is not what we want
+while (obj != null && i < len) {
+  obj = obj[path[i++]];
+}
+```
 
 has
 
@@ -966,7 +1055,18 @@ has，但是会检查原型链上的属性
 
 invert
 
-键值互换
+```js
+const invert(object) {
+  const result = {};
+  Object.keys(object).forEach((key) => {
+    // should check if value is false, but "",undefined,null,0,false won't get error, they are valid key value
+    const value = object[key];
+    objcet[value] = key;
+    // result[object[key]] = key;
+  });
+  return result;
+}
+```
 
 invertBy
 

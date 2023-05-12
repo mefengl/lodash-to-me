@@ -1,5 +1,7 @@
 # lodash-to-me
 
+> Recently found a project exactly give the code that I want to read, that is https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore
+
 souce code, of course, or what?
 
 参考：

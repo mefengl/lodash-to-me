@@ -1,7 +1,5 @@
 # lodash-to-me
 
-> Recently found a project exactly give the code that I want to read, that is https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore
-
 souce code, of course, or what?
 
 参考：
@@ -1823,3 +1821,21 @@ const getTag = (value) => {
   return toString(value);
 };
 ```
+
+## you might not need lodash
+
+```js
+// https://youmightnotneed.com/lodash#flip
+const flip =
+  func =>
+  (...args) =>
+    func(...args.reverse())
+
+// https://youmightnotneed.com/lodash#negate
+const negate =
+  func =>
+  (...args) =>
+    !func(...args)
+```
+
+These two examples have astonishing similarities (many such functions are similar in some ways), but the differences between these two functions are even more fascinating. Flip mainly operates on input parameters, while negate takes the opposite of the output, which is very interesting.

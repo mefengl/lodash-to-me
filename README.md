@@ -1824,6 +1824,8 @@ const getTag = (value) => {
 
 ## you might not need lodash
 
+## input/output
+
 ```js
 // https://youmightnotneed.com/lodash#flip
 const flip =
@@ -1839,3 +1841,9 @@ const negate =
 ```
 
 These two examples have astonishing similarities (many such functions are similar in some ways), but the differences between these two functions are even more fascinating. Flip mainly operates on input parameters, while negate takes the opposite of the output, which is very interesting.
+
+## before, after and once
+
+These three functions are all classic examples that utilize the characteristics of closures, which record a special value - the number of times the function is called. 
+
+> `once` is basically the same as `before(2)`, but much more sensible.
